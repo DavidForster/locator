@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Geolocation Example</title>
+	<title>Geolocation & What3Words Example</title>
+	<script src="https://api.what3words.com/v3/what3words.js?key=R8EEDYYL"></script>
+	<!-- Replace YOUR_API_KEY with your own What3Words API key -->
 </head>
 <body>
-	<h1>Your Coordinates</h1>
+	<h1>Your Coordinates and 3-Word Address</h1>
 	<p id="coordinates"></p>
+	<p id="w3w"></p>
 
 	<script>
 		function showPosition(position) {
 			var lat = position.coords.latitude;
 			var lon = position.coords.longitude;
 			document.getElementById("coordinates").innerHTML = "Latitude: " + lat + "<br>Longitude: " + lon;
+
+			var words = what3words.toWords([lat, lon], function(data) {
+				if (data.status.code == 200) {
+					document.getElementById("w3w").innerHTML = "Your 3-Word Address: " + data.words;
+				} else {
+					document.getElementById("w3w").innerHTML = "Unable to get 3-word address.";
+				}
+			});
 		}
 
 		function showError(error) {
