@@ -16,8 +16,8 @@
 			document.getElementById("coordinates").innerHTML = "Latitude: " + lat + "<br>Longitude: " + lon;
 			
 			what3words.api.convertTo3wa({lat:lat, lng:lon}, 'en').then(function(response) {
-				document.getElementById("w3w").innerHTML = "Your 3-Word Address: " + response;
-				console.log("[convertTo3wa]", "<a href='" + response.map + "'" target='blank'>" + response.words + "</a>, " + response.nearestPlace + ", " + response.country);
+				document.getElementById("w3w").innerHTML = "Your 3-Word Address: " + "<a href='" + response.map + "'" target='blank'>" + response.words + "</a>, " + response.nearestPlace + ", " + response.country;
+				console.log("[convertTo3wa]", response);
 			});
 		}
 
